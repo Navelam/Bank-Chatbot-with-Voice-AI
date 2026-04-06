@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HDFC Bank - Personal Banking & Netbanking Services</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+<!-- Top Bar -->
+<div class="top-bar">
+    <div class="container">
+        <div class="top-bar-left">
+            <span>📞 1800-419-2332</span>
+            <span>✉️ support@hdfcbank.com</span>
+        </div>
+        <div class="top-bar-right">
+            <a href="#">Locate Us</a>
+            <a href="#">Branch/ATM</a>
+            {% if session.user_id %}
+                <span>👋 Welcome, {{ session.username }}</span>
+                <a href="/logout">Logout</a>
+            {% else %}
+                <a href="/login">Login / Register</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+        <div class="container">
+            <div class="logo">
+                <span class="logo-icon">🏦</span>
+                <span class="logo-text">HDFC BANK</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#">Personal</a></li>
+                <li><a href="#">NRI</a></li>
+                <li><a href="#">SME</a></li>
+                <li><a href="#">Wholesale</a></li>
+                <li><a href="#">Agri</a></li>
+                <li><a href="#">Locate Us</a></li>
+                <li><a href="#">Blog</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <button class="btn-outline" id="applyBtn">Apply Online</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Secure and hassle-free<br>banking on-the-go.</h1>
+                <p>Experience industry-leading Digital Banking Solutions.</p>
+                <div class="hero-buttons">
+                    <button class="btn-primary">Open Account →</button>
+                    <button class="btn-secondary">Apply for Loan →</button>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <h3>10M+</h3>
+                        <p>Happy Customers</p>
+                    </div>
+                    <div class="stat">
+                        <h3>₹5L+ Cr</h3>
+                        <p>Assets Under Management</p>
+                    </div>
+                    <div class="stat">
+                        <h3>24/7</h3>
+                        <p>Customer Support</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="{{ url_for('static', filename='images/banking-app.jpg') }}" alt="Banking App">
+            </div>
+        </div>
+    </section>
+
+    <!-- Banking Solutions Section -->
+    <section class="solutions">
+        <div class="container">
+            <h2 class="section-title">Digital Banking <span class="highlight">Solutions</span></h2>
+            <p class="section-subtitle">Experience seamless banking with our industry-leading digital platforms</p>
+            <div class="solutions-grid">
+                <div class="solution-card">
+                    <div class="solution-icon">📱</div>
+                    <h3>Mobile Banking</h3>
+                    <p>Bank on the go with our feature-rich mobile app</p>
+                    <a href="#">Learn More →</a>
+                </div>
+                <div class="solution-card">
+                    <div class="solution-icon">💻</div>
+                    <h3>Net Banking</h3>
+                    <p>Secure online banking from your desktop</p>
+                    <a href="#">Learn More →</a>
+                </div>
+                <div class="solution-card">
+                    <div class="solution-icon">💬</div>
+                    <h3>WhatsApp Banking</h3>
+                    <p>Banking at your fingertips on WhatsApp</p>
+                    <a href="#">Learn More →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products & Services -->
+    <section class="products">
+        <div class="container">
+            <h2 class="section-title">Products & <span class="highlight">Services</span></h2>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-icon">💰</div>
+                    <h3>Loans</h3>
+                    <p>Personal, Home, Car & Education Loans</p>
+                    <button class="product-btn">Apply Now</button>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">💳</div>
+                    <h3>Credit Cards</h3>
+                    <p>Rewards, Cashback & Exclusive Offers</p>
+                    <button class="product-btn">Apply Now</button>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">🏦</div>
+                    <h3>Accounts</h3>
+                    <p>Savings, Current & Salary Accounts</p>
+                    <button class="product-btn">Open Now</button>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon">📈</div>
+                    <h3>Investments</h3>
+                    <p>FD, RD, Mutual Funds & Insurance</p>
+                    <button class="product-btn">Invest Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fraud Awareness Section -->
+    <section class="fraud-awareness">
+        <div class="container">
+            <div class="fraud-content">
+                <h2>Let's Make India <span class="highlight">Fraud Free</span></h2>
+                <p>Vigil Aunty fraud awareness - Stay alert, stay safe</p>
+                <ul class="fraud-tips">
+                    <li>🔒 Never share OTP with anyone</li>
+                    <li>🔒 Don't click on suspicious links</li>
+                    <li>🔒 Use strong passwords</li>
+                    <li>🔒 Enable two-factor authentication</li>
+                </ul>
+                <button class="btn-primary">Know More</button>
+            </div>
+            <div class="fraud-image">
+                <img src="{{ url_for('static', filename='images/fraud-awareness.jpg') }}" alt="Fraud Awareness">
+            </div>
+        </div>
+    </section>
+
+    <!-- Calculators Section -->
+    <section class="calculators">
+        <div class="container">
+            <h2 class="section-title">Financial <span class="highlight">Calculators</span></h2>
+            <div class="calculators-grid">
+                <div class="calculator-card">
+                    <h3>💰 Loan EMI Calculator</h3>
+                    <p>Calculate your monthly EMI easily</p>
+                    <button class="calc-btn">Calculate →</button>
+                </div>
+                <div class="calculator-card">
+                    <h3>📊 FD Calculator</h3>
+                    <p>Check your fixed deposit returns</p>
+                    <button class="calc-btn">Calculate →</button>
+                </div>
+                <div class="calculator-card">
+                    <h3>🏠 Home Loan Calculator</h3>
+                    <p>Plan your home loan EMI</p>
+                    <button class="calc-btn">Calculate →</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Customer Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our <span class="highlight">Customers Say</span></h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p>"Excellent banking experience! The mobile app is very user-friendly."</p>
+                    <h4>- Rajesh Sharma</h4>
+                    <div class="rating">★★★★★</div>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Quick loan approval and great customer support. Highly recommended!"</p>
+                    <h4>- Priya Patel</h4>
+                    <div class="rating">★★★★★</div>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Best banking services in India. Their chatbot is very helpful!"</p>
+                    <h4>- Amit Kumar</h4>
+                    <div class="rating">★★★★★</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>HDFC BANK</h3>
+                    <p>Banking Beyond Numbers</p>
+                    <div class="social-links">
+                        <a href="#">📘</a>
+                        <a href="#">🐦</a>
+                        <a href="#">📷</a>
+                        <a href="#">🔗</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Products</h4>
+                    <a href="#">Loans</a>
+                    <a href="#">Credit Cards</a>
+                    <a href="#">Accounts</a>
+                    <a href="#">Investments</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Support</h4>
+                    <a href="#">Customer Care</a>
+                    <a href="#">Branch Locator</a>
+                    <a href="#">ATM Locator</a>
+                    <a href="#">Contact Us</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Resources</h4>
+                    <a href="#">Blog</a>
+                    <a href="#">Calculators</a>
+                    <a href="#">FAQs</a>
+                    <a href="#">Downloads</a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 HDFC Bank. All rights reserved. | Terms & Conditions | Privacy Policy</p>
+            </div>
+        </div>
+    </footer>
+
+<!-- Chat Icon - Add this before the closing body tag -->
+<div id="chatbotIcon" class="chat-icon">
+    <span>💬</span>
+    <span class="chat-icon-badge">Online</span>
+</div>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+<!-- Chat Window -->
+<div id="chatbot" class="chatbot-window" style="display: none;">
+    <div class="chatbot-header">
+        <div class="chatbot-header-info">
+            <div class="chatbot-avatar">🤖</div>
+            <div>
+                <h3>HDFC Bank Assistant</h3>
+                <p>Online • 24/7 Support</p>
+            </div>
+        </div>
+        <div class="chatbot-controls">
+  <div class="language-switch">
+            <button id="langEnBtn" class="lang-btn active">English</button>
+            <button id="langTaBtn" class="lang-btn">தமிழ்</button>
+        </div>
+            <button id="minimizeChatbot" title="Minimize">─</button>
+            <button id="maximizeChatbot" title="Maximize">□</button>
+            <button id="closeChatbot" title="Close">✕</button>
+        </div>
+    </div>
+    <div class="chatbot-body" id="chatbotBody">
+        <div class="message bot">
+            <div class="message-avatar">🤖</div>
+            <div class="message-content">
+                <div class="message-text">Welcome to HDFC Bank! How can I assist you with your banking needs today?</div>
+                <div class="message-time">Just now</div>
+            </div>
+        </div>
+    </div>
+    <div class="chatbot-input-area">
+        <button id="micBtn" class="mic-btn" title="Voice Input">🎤</button>
+        <input type="text" id="chatbotInput" placeholder="Type your message..." autocomplete="off">
+        <button id="sendBtn" class="send-btn">Send</button>
+    </div>
+    <button id="clearMessages" class="clear-btn" style="margin: 10px;">Clear Chat</button>
+    
+</div>
+
+<script src="https://code.responsivevoice.org/responsivevoice.js?key=YOUR_API_KEY"></script>
+</body>
+</html>

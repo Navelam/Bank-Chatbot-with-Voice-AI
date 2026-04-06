@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>HDFC Bank - Login & Register</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        /* Animated background */
+        body::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200" opacity="0.06"><path fill="white" d="M100 0L120 70L200 70L135 113L160 180L100 140L40 180L65 113L0 70L80 70L100 0z"/></svg>');
+            background-repeat: repeat;
+            pointer-events: none;
+            animation: floatBG 25s linear infinite;
+        }
+
+        @keyframes floatBG {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .main-wrapper {
+            width: 100%;
+            max-width: 1000px;
+            z-index: 2;
+        }
+
+        .split-container {
+            display: flex;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+            background: white;
+            transition: transform 0.3s ease;
+        }
+
+        .split-container:hover {
+            transform: translateY(-5px);
+        }
+
+        /* LEFT SIDE - LOGIN */
+        .login-panel {
+            width: 50%;
+            background: white;
+            padding: 48px 40px;
+            animation: slideInLeft 0.5s ease;
+        }
+
+        .login-panel h2 {
+            color: #4a63c7;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 32px;
+        }
+
+        .input-group {
+            margin-bottom: 24px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 13px;
+        }
+
+        .input-group label i {
+            margin-right: 8px;
+            color: #4a63c7;
+        }
+
+        .input-box {
+            display: flex;
+            align-items: center;
+            border: 1.5px solid #e2e8f0;
+            border-radius: 14px;
+            padding: 12px 16px;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .input-box:hover, .input-box:focus-within {
+            border-color: #4a63c7;
+            box-shadow: 0 0 0 3px rgba(74, 99, 199, 0.15);
+        }
+
+        .input-box i {
+            margin-right: 12px;
+            color: #94a3b8;
+            font-size: 18px;
+        }
+
+        .input-box:focus-within i {
+            color: #4a63c7;
+        }
+
+        .input-box input {
+            border: none;
+            outline: none;
+            width: 100%;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            background: transparent;
+        }
+
+        .options {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 20px 0 28px;
+        }
+
+        .checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            color: #4a5568;
+            font-size: 13px;
+        }
+
+        .checkbox-label input {
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            accent-color: #4a63c7;
+        }
+
+        .forgot-link {
+            color: #4a63c7;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .forgot-link:hover {
+            text-decoration: underline;
+        }
+
+        .login-btn {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #4a63c7 0%, #3b52b0 100%);
+            color: white;
+            border: none;
+            border-radius: 40px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(74, 99, 199, 0.4);
+        }
+
+        /* RIGHT SIDE - REGISTER */
+        .register-panel {
+            width: 50%;
+            background: linear-gradient(135deg, #4a63c7 0%, #3b52b0 100%);
+            color: white;
+            padding: 48px 40px;
+            text-align: center;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            animation: slideInRight 0.5s ease;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: rotate(90deg);
+        }
+
+        .register-panel h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .register-panel p {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 28px;
+        }
+
+        .register-btn {
+            padding: 14px 32px;
+            background: white;
+            color: #4a63c7;
+            border: none;
+            border-radius: 40px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .register-btn:hover {
+            transform: translateY(-2px);
+            background: #f8f9fc;
+        }
+
+        /* BACK TO HOME BUTTON */
+        .back-home-container {
+            text-align: center;
+            margin-top: 24px;
+        }
+
+        .back-home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            padding: 10px 24px;
+            border-radius: 40px;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+        }
+
+        .back-home-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-3px);
+        }
+
+        /* Animations */
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .error-message {
+            color: #dc2626;
+            font-size: 11px;
+            margin-top: 6px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .input-box.error {
+            border-color: #dc2626;
+            animation: shake 0.3s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .message-toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a2c3e;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 14px;
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            gap: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .split-container {
+                flex-direction: column;
+            }
+            .login-panel, .register-panel {
+                width: 100%;
+                padding: 32px 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="main-wrapper">
+    <div class="split-container">
+        <!-- LEFT SIDE - LOGIN -->
+        <div class="login-panel">
+            <h2>Login</h2>
+
+            <div class="input-group">
+                <label><i class="fas fa-user"></i> Username or Email Address</label>
+                <div class="input-box" id="loginUsernameBox">
+                    <i class="fas fa-envelope"></i>
+                    <input type="text" id="loginUsername" placeholder="Enter your username or email" autocomplete="username">
+                </div>
+                <div class="error-message" id="loginUsernameError">Please enter username/email</div>
+            </div>
+
+            <div class="input-group">
+                <label><i class="fas fa-lock"></i> Password</label>
+                <div class="input-box" id="loginPasswordBox">
+                    <i class="fas fa-key"></i>
+                    <input type="password" id="loginPassword" placeholder="Enter your password" autocomplete="current-password">
+                </div>
+                <div class="error-message" id="loginPasswordError">Please enter password</div>
+            </div>
+
+            <div class="options">
+                <label class="checkbox-label">
+                    <input type="checkbox" id="rememberMe"> Remember Me
+                </label>
+                <a href="#" class="forgot-link" id="forgotPasswordLink">Lost Your Password?</a>
+            </div>
+
+            <button class="login-btn" id="loginBtn">
+                <i class="fas fa-arrow-right-to-bracket"></i> Log In
+            </button>
+        </div>
+
+        <!-- RIGHT SIDE - REGISTER -->
+        <div class="register-panel">
+            <div class="close-btn" id="closeRegisterPanel">
+                <i class="fas fa-times"></i>
+            </div>
+            <h2>Register</h2>
+            <p>Don't have an account? Register one!</p>
+            <button class="register-btn" id="registerRedirectBtn">
+                <i class="fas fa-user-plus"></i> Register an Account
+            </button>
+        </div>
+    </div>
+
+    <!-- BACK TO HOME BUTTON -->
+    <div class="back-home-container">
+        <div class="back-home-btn" id="backHomeBtn">
+            <i class="fas fa-arrow-left"></i> Back to Home
+        </div>
+    </div>
+</div>
+
+<div id="messageToast" class="message-toast">
+    <i class="fas fa-info-circle"></i>
+    <span id="toastMessage"></span>
+</div>
+
+<!-- Register Modal -->
+<div id="registerModal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;">
+    <div style="background: white; border-radius: 28px; max-width: 450px; width: 90%; padding: 36px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+            <h2 style="color: #4a63c7; font-size: 24px;">Create Account</h2>
+            <button id="closeModalBtn" style="background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
+        </div>
+        
+        <form id="registerForm" onsubmit="event.preventDefault(); handleRegister();">
+            <div class="input-group">
+                <label>Username</label>
+                <div class="input-box">
+                    <i class="fas fa-user"></i>
+                    <input type="text" id="regUsername" placeholder="Choose a username" required>
+                </div>
+                <div class="error-message" id="regUsernameError">Username is required</div>
+            </div>
+            
+            <div class="input-group">
+                <label>Email Address</label>
+                <div class="input-box">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="regEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="error-message" id="regEmailError">Valid email is required</div>
+            </div>
+            
+            <div class="input-group">
+                <label>Password</label>
+                <div class="input-box">
+                    <i class="fas fa-key"></i>
+                    <input type="password" id="regPassword" placeholder="Create a password (min 6 characters)" required>
+                </div>
+                <div class="error-message" id="regPasswordError">Password must be at least 6 characters</div>
+            </div>
+            
+            <div class="input-group">
+                <label>Confirm Password</label>
+                <div class="input-box">
+                    <i class="fas fa-shield-alt"></i>
+                    <input type="password" id="regConfirmPassword" placeholder="Confirm your password" required>
+                </div>
+                <div class="error-message" id="regConfirmError">Passwords do not match</div>
+            </div>
+            
+            <button type="submit" class="login-btn" style="margin-top: 20px;" id="registerSubmitBtn">
+                <i class="fas fa-user-plus"></i> Register Account
+            </button>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Back to Home button functionality
+    document.getElementById('backHomeBtn').addEventListener('click', function() {
+        window.location.href = '/';
+    });
+    
+    // Show message function
+    function showMessage(message, isError) {
+        const toast = document.getElementById('messageToast');
+        const toastMsg = document.getElementById('toastMessage');
+        toastMsg.innerText = message;
+        toast.style.backgroundColor = isError ? '#dc2626' : '#1e4620';
+        toast.style.display = 'flex';
+        setTimeout(() => { toast.style.display = 'none'; }, 3000);
+    }
+    
+    // Login functionality
+    document.getElementById('loginBtn').addEventListener('click', async function() {
+        const username = document.getElementById('loginUsername').value.trim();
+        const password = document.getElementById('loginPassword').value.trim();
+        
+        if (!username || !password) {
+            showMessage('⚠️ Please enter both username and password', true);
+            return;
+        }
+        
+        showMessage('🔐 Authenticating...', false);
+        
+        try {
+            const formData = new FormData();
+            formData.append('username', username);
+            formData.append('password', password);
+            
+            const response = await fetch('/login', { method: 'POST', body: formData });
+            const result = await response.json();
+            
+            if (result.success) {
+                if (document.getElementById('rememberMe').checked) {
+                    localStorage.setItem('savedUsername', username);
+                }
+                showMessage('✅ Login successful! Redirecting...', false);
+                setTimeout(() => { window.location.href = result.redirect || '/'; }, 1000);
+            } else {
+                showMessage('❌ ' + result.message, true);
+            }
+        } catch (error) {
+            console.error('Login error:', error);
+            showMessage('❌ Network error. Make sure Flask server is running on port 5000', true);
+        }
+    });
+    
+    // REGISTER FUNCTION - THIS IS THE FIXED PART
+    async function handleRegister() {
+        const username = document.getElementById('regUsername').value.trim();
+        const email = document.getElementById('regEmail').value.trim();
+        const password = document.getElementById('regPassword').value;
+        const confirm = document.getElementById('regConfirmPassword').value;
+        
+        // Clear previous errors
+        document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+        
+        // Validation
+        if (!username) {
+            document.getElementById('regUsernameError').style.display = 'block';
+            return;
+        }
+        
+        if (!email || !email.includes('@')) {
+            document.getElementById('regEmailError').style.display = 'block';
+            return;
+        }
+        
+        if (password.length < 6) {
+            document.getElementById('regPasswordError').style.display = 'block';
+            return;
+        }
+        
+        if (password !== confirm) {
+            document.getElementById('regConfirmError').style.display = 'block';
+            return;
+        }
+        
+        showMessage('📝 Creating account...', false);
+        
+        try {
+            const formData = new FormData();
+            formData.append('username', username);
+            formData.append('email', email);
+            formData.append('password', password);
+            
+            const response = await fetch('/register', { 
+                method: 'POST', 
+                body: formData 
+            });
+            const result = await response.json();
+            
+            if (result.success) {
+                showMessage('✅ ' + result.message, false);
+                setTimeout(() => { 
+                    window.location.href = result.redirect || '/'; 
+                }, 1000);
+            } else {
+                showMessage('❌ ' + result.message, true);
+            }
+        } catch (error) {
+            console.error('Registration error:', error);
+            showMessage('❌ Network error. Make sure Flask server is running on port 5000', true);
+        }
+    }
+    
+    // Register modal handlers
+    document.getElementById('registerRedirectBtn').onclick = () => {
+        // Clear form
+        document.getElementById('regUsername').value = '';
+        document.getElementById('regEmail').value = '';
+        document.getElementById('regPassword').value = '';
+        document.getElementById('regConfirmPassword').value = '';
+        document.getElementById('registerModal').style.display = 'flex';
+    };
+    
+    function closeModal() {
+        document.getElementById('registerModal').style.display = 'none';
+    }
+    
+    document.getElementById('closeRegisterPanel').onclick = closeModal;
+    document.getElementById('closeModalBtn').onclick = closeModal;
+    
+    // Close modal when clicking outside
+    window.onclick = function(event) {
+        const modal = document.getElementById('registerModal');
+        if (event.target === modal) {
+            closeModal();
+        }
+    }
+    
+    // Forgot password
+    document.getElementById('forgotPasswordLink').onclick = (e) => {
+        e.preventDefault();
+        showMessage('📧 Password reset link sent to your email!', false);
+    };
+    
+    // Enter key press for login
+    document.getElementById('loginPassword').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            document.getElementById('loginBtn').click();
+        }
+    });
+</script>
+</body>
+</html>
